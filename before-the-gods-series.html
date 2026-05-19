@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Before the Gods — Limited Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ochre: #c8832a;
+    --ember: #e05a1a;
+    --ash: #0e0b08;
+    --deep: #13100c;
+    --gold: #d4a847;
+    --gold-dim: #9a7a30;
+    --parchment: #e8dcc8;
+    --parchment-dim: #a89880;
+    --line: rgba(212, 168, 71, 0.2);
+  }
+
+  html, body {
+    background: var(--ash);
+    color: var(--parchment);
+    font-family: 'EB Garamond', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* BERINGIA full page background */
+  body {
+    position: relative;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('https://beforethegods13.github.io/beforethegods/BERINGIA.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0.28;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Dark overlay on top of image */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(14, 11, 8, 0.55) 0%,
+      rgba(14, 11, 8, 0.45) 40%,
+      rgba(14, 11, 8, 0.55) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .page {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 64px;
+    position: relative;
+  }
+
+  .header::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 32px auto 0;
+  }
+
+  .title-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .title-main {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 400;
+    color: var(--parchment);
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+
+  .title-sub {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* LOGLINE BAR */
+  .logline {
+    background: linear-gradient(135deg, rgba(200, 131, 42, 0.08), rgba(224, 90, 26, 0.05));
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ochre);
+    padding: 20px 28px;
+    margin-bottom: 56px;
+    text-align: center;
+  }
+
+  .logline p {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(13px, 2vw, 16px);
+    letter-spacing: 0.12em;
+    color: var(--parchment);
+    line-height: 1.7;
+  }
+
+  .logline span {
+    color: var(--gold);
+  }
+
+  /* STATS ROW */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    margin-bottom: 64px;
+    border: 1px solid var(--line);
+  }
+
+  .stat {
+    background: var(--deep);
+    padding: 24px 16px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(22px, 3vw, 32px);
+    color: var(--gold);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--parchment-dim);
+    text-transform: uppercase;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .section-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* EPISODES */
+  .episodes {
+    position: relative;
+    margin-bottom: 64px;
+  }
+
+  /* Vertical timeline line */
+  .episodes::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--gold-dim) 10%, var(--gold-dim) 90%, transparent);
+    opacity: 0.4;
+  }
+
+  .episode {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0 24px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+
+  .episode:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Episode number node */
+  .ep-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 18px;
+  }
+
+  .ep-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--ash);
+    box-shadow: 0 0 0 1px var(--gold-dim);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ep-number {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--gold-dim);
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  /* Episode card */
+  .ep-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid var(--line);
+    border-left: 2px solid rgba(212, 168, 71, 0.3);
+    padding: 18px 24px 20px;
+    margin-bottom: 12px;
+    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ep-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--ochre), transparent);
+    opacity: 0.4;
+  }
+
+  .ep-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .ep-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(13px, 2vw, 16px);
+    font-weight: 400;
+    color: var(--parchment);
+    letter-spacing: 0.03em;
+  }
+
+  .ep-era {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ochre);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .ep-civilizations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .civ-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid rgba(212, 168, 71, 0.2);
+    background: rgba(212, 168, 71, 0.04);
+  }
+
+  .ep-desc {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(14px, 1.8vw, 16px);
+    color: var(--parchment-dim);
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  .ep-note {
+    margin-top: 8px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(212, 168, 71, 0.5);
+    text-transform: uppercase;
+  }
+
+  /* BUDGET */
+  .budget-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-bottom: 64px;
+  }
+
+  .budget-cell {
+    background: var(--deep);
+    padding: 28px 32px;
+  }
+
+  .budget-cell.highlight {
+    background: linear-gradient(135deg, rgba(200,131,42,0.1), rgba(224,90,26,0.06));
+  }
+
+  .budget-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .budget-value {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: var(--parchment);
+    margin-bottom: 8px;
+  }
+
+  .budget-value span {
+    color: var(--gold);
+  }
+
+  .budget-note {
+    font-family: 'EB Garamond', serif;
+    font-size: 14px;
+    color: var(--parchment-dim);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* CO-PRODUCTION */
+  .copro {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 64px;
+  }
+
+  .copro-item {
+    border: 1px solid var(--line);
+    padding: 20px;
+    text-align: center;
+    background: rgba(255,255,255,0.01);
+  }
+
+  .copro-flag {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .copro-country {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--parchment);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .copro-detail {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    color: var(--parchment-dim);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* CLOSING QUOTE */
+  .closing {
+    text-align: center;
+    padding: 48px 40px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .closing::before, .closing::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+  .closing::before { top: -1px; }
+  .closing::after { bottom: -1px; }
+
+  .closing-quote {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(12px, 2vw, 15px);
+    letter-spacing: 0.18em;
+    color: var(--parchment);
+    line-height: 2;
+    text-transform: uppercase;
+  }
+
+  .closing-quote em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding-top: 40px;
+  }
+
+  .footer p {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .header  { animation: fadeUp 0.8s ease both; }
+  .logline { animation: fadeUp 0.8s 0.15s ease both; }
+  .stats   { animation: fadeUp 0.8s 0.25s ease both; }
+  .episodes { animation: fadeUp 0.8s 0.35s ease both; }
+
+  @media (max-width: 640px) {
+    .page { padding: 40px 20px 60px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .budget-grid { grid-template-columns: 1fr; }
+    .copro { grid-template-columns: 1fr; }
+    .episodes::before { left: 20px; }
+    .episode { grid-template-columns: 44px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <p class="title-eyebrow">A Limited Series</p>
+    <h1 class="title-main">Before the Gods</h1>
+    <p class="title-sub">Seven Episodes &nbsp;·&nbsp; Eleven Civilizations &nbsp;·&nbsp; 70,000 Years</p>
+  </div>
+
+  <!-- LOGLINE -->
+  <div class="logline">
+    <p>A prestige adult animated limited series spanning <span>70,000 years of human history</span> — from the first question asked beside a fire in Southern Africa to the last person asking it today. <span>One story. One question. Never answered.</span></p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Episodes</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">11</span>
+      <span class="stat-label">Civilizations</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">70K</span>
+      <span class="stat-label">Years of History</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">$28–35M</span>
+      <span class="stat-label">Est. Budget</span>
+    </div>
+  </div>
+
+  <!-- EPISODES -->
+  <div class="section-header"><h2>Episode Structure</h2></div>
+  <div class="episodes">
+
+    <div class="episode">
+      <div class="ep-node">
+        <div class="ep-dot"></div>
+        <span class="ep-number">Ep 1</span>
+      </div>
+      <div class="ep-card">
+        <div class="ep-header">
+          <span class="ep-title">The First Question</span>
+          <span class="ep-era">70,000 BCE · Southern Africa</span>
+        </div>
+        <div class="ep-civilizations">
+          <span class="civ-tag">Prologue</span>
+          <span class="civ-tag">Animism — Origin</span>
+        </div>
+        <p class="ep-desc">Monica's deathbed opens the film. We cut back 70,000 years to Kael — a hunter in Southern Africa who loses his best friend to a bee sting and asks the first question humanity ever asked. He finds no answer. He draws a face on a cave wall and presses his hand beside it.</p>
+        <p class="ep-note">Est. 1.2B animist followers today</p>
+      </div>
+    </div>
+
+    <div class="episode">
+      <div class="ep-node">
+        <div class="ep-dot"></div>
+        <span class="ep-number">Ep 2</span>
+      </div>
+      <div class="ep-card">
+        <div class="ep-header">
+          <span class="ep-title">The Ice Bridge</span>
+          <span class="ep-era">18,000 BCE · Beringia</span>
+        </div>
+        <div class="ep-civilizations">
+          <span class="civ-tag">Animism — Migration</span>
+          <span class="civ-tag">Indigenous Americas — Origin</span>
+        </div>
+        <p class="ep-desc">A band of Paleo-Siberian people cross the frozen land bridge between worlds. A mammoth hunt. A fire that cannot go out. The Great Mother Bear walking with them through the blizzard. They carry belief itself into an empty continent.</p>
+        <p class="ep-note">Ancestors of every indigenous culture in the Americas</p>
+      </div>
+    </div>
+
+    <div class="episode">
+      <div class="ep-node">
+        <div class="ep-dot"></div>
+        <span class="ep-number">Ep 3</span>
+      </div>
+      <div class="ep-card">
+        <div class="ep-header">
+          <span class="ep-title">The God Makers</span>
+          <span class="ep-era">c. 3,000 BCE · Mesopotamia</span>
+        </div>
+        <div class="ep-civilizations">
+          <span class="civ-tag">Sumerian Religion</span>
+          <span class="civ-tag">Hinduism — Ancient Parallel</span>
+        </div>
+        <p class="ep-desc">The first cities. The first priests. Enna grinds grain and watches religion become power. Her son Lidu falls in love with the goddess Ninhursag — and is terrified by Enlil. The oldest question acquires its first institutional answer.</p>
+        <p class="ep-note">Hinduism: 1.2B followers — oldest continuously practiced religion on Earth</p>
+      </div>
+    </div>
+
+    <div class="episode">
+      <div class="ep-node">
+        <div class="ep-dot"></div>
+        <span class="ep-number">Ep 4</span>
+      </div>
+      <div class="ep-card">
+        <div class="ep-header">
+          <span class="ep-title">They Cannot Take Our Story</span>
+          <span class="ep-era">c. 550 BCE · Babylon &amp; Nazareth</span>
+        </div>
+        <div class="ep-civilizations">
+          <span class="civ-tag">Judaism</span>
+          <span class="civ-tag">Christianity — Origin</span>
+          <span class="civ-tag">The Axial Age</span>
+        </div>
+        <p class="ep-desc">Tobias and Ezra write the Torah in exile in the most powerful city on Earth. Marduk's dragon speaks. Ishtar appears in a Babylon market. Then: a tekton's workshop in Nazareth. A man we never see the face of. His mother at her loom. His father's hands.</p>
+        <p class="ep-note">Judaism: 15M · Christianity: 2.4B · The Axial Age: same questions, five civilizations, same century</p>
+      </div>
+    </div>
+
+    <div class="episode">
+      <div class="ep-node">
+        <div class="ep-dot"></div>
+        <span class="ep-number">Ep 5</span>
+      </div>
+      <div class="ep-card">
+        <div class="ep-header">
+          <span class="ep-title">The Long Goodbye — Part One</span>
+          <span class="ep-era">4th Century CE · 610 CE · 712 CE</span>
+        </div>
+        <div class="ep-civilizations">
+          <span class="civ-tag">Hellenism</span>
+          <span class="civ-tag">Islam</span>
+          <span class="civ-tag">Shinto</span>
+        </div>
+        <p class="ep-desc">An old woman makes her last offering at a Greek temple as a Roman soldier watches. A lamp burns in a cave on Mount Hira and a man comes down changed. Two gods wrestle for the soul of Japan on a black shore — and the match is still being thrown today in Ryōgoku Kokugikan.</p>
+        <p class="ep-note">Islam: 1.9B · Shinto: 300M · Hellenism: small but growing</p>
+      </div>
+    </div>
+
+    <div class="episode">
+      <div class="ep-node">
+        <div class="ep-dot"></div>
+        <span class="ep-number">Ep 6</span>
+      </div>
+      <div class="ep-card">
+        <div class="ep-header">
+          <span class="ep-title">The Long Goodbye — Part Two</span>
+          <span class="ep-era">60 CE · 7th Century CE · 1562 CE</span>
+        </div>
+        <div class="ep-civilizations">
+          <span class="civ-tag">Celtic / Druidism</span>
+          <span class="civ-tag">Zoroastrianism</span>
+          <span class="civ-tag">Mayan Religion</span>
+        </div>
+        <p class="ep-desc">A Druid elder pours his entire tradition into an apprentice because there is no other container for it. A Zoroastrian priest carries a sacred flame out of a burning city on a boat — that fire is still burning today. A Mayan priest watches three thousand years of knowledge turn to ash.</p>
+        <p class="ep-note">Zoroastrianism: shaped Judaism, Christianity &amp; Islam · Fewer than 200,000 followers remain</p>
+      </div>
+    </div>
+
+    <div class="episode">
+      <div class="ep-node">
+        <div class="ep-dot"></div>
+        <span class="ep-number">Ep 7</span>
+      </div>
+      <div class="ep-card">
+        <div class="ep-header">
+          <span class="ep-title">The Question Is Enough</span>
+          <span class="ep-era">Present Day</span>
+        </div>
+        <div class="ep-civilizations">
+          <span class="civ-tag">Epilogue</span>
+          <span class="civ-tag">4,200 Religions</span>
+          <span class="civ-tag">8 Billion People</span>
+        </div>
+        <p class="ep-desc">Theo at Monica's window. The same stars Kael looked at 70,000 years ago. The score builds from one human voice to thousands — every person who ever looked up and asked — then strips back to silence. One star. Held. The question has never been answered. It has never stopped being asked.</p>
+        <p class="ep-note">84% of 8 billion people identify with a religious belief</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BUDGET -->
+  <div class="section-header"><h2>Budget Overview</h2></div>
+  <div class="budget-grid">
+    <div class="budget-cell highlight">
+      <p class="budget-label">Total Series Budget</p>
+      <p class="budget-value"><span>$28 – 35 Million</span></p>
+      <p class="budget-note">Seven episodes at $4–5M per episode. Scalable through co-production financing.</p>
+    </div>
+    <div class="budget-cell">
+      <p class="budget-label">Per Episode</p>
+      <p class="budget-value">$4 – 5M</p>
+      <p class="budget-note">Prestige streaming tier. Distinct visual world per episode — each civilization its own aesthetic language.</p>
+    </div>
+    <div class="budget-cell">
+      <p class="budget-label">Animation Style</p>
+      <p class="budget-value">Heightened<br>Photorealism</p>
+      <p class="budget-note">Cinematic. Painterly. Each era rendered in its own visual register.</p>
+    </div>
+    <div class="budget-cell">
+      <p class="budget-label">Format</p>
+      <p class="budget-value">Limited Series</p>
+      <p class="budget-note">7 episodes · PG-13 · 75–80 min feature version available as theatrical cut.</p>
+    </div>
+  </div>
+
+  <!-- CO-PRODUCTION -->
+  <div class="section-header"><h2>Co-Production Structure</h2></div>
+  <div class="copro">
+    <div class="copro-item">
+      <span class="copro-flag">🇮🇪</span>
+      <p class="copro-country">Ireland</p>
+      <p class="copro-detail">Screen Ireland · Section 481 tax incentive · Cartoon Saloon · natural thematic fit</p>
+    </div>
+    <div class="copro-item">
+      <span class="copro-flag">🇬🇧</span>
+      <p class="copro-country">United Kingdom</p>
+      <p class="copro-detail">BFI · Film4 · BBC Film · 40% HETV tax relief · Aardman co-production model</p>
+    </div>
+    <div class="copro-item">
+      <span class="copro-flag">🇨🇦</span>
+      <p class="copro-country">Canada</p>
+      <p class="copro-detail">Telefilm Canada · Canadian Film or Video Production Tax Credit · proven animation infrastructure</p>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <p class="closing-quote">
+      <em>Seven Episodes. Eleven Civilizations. 70,000 Years.</em><br>
+      One Question. Never Answered.<br>
+      <em>Never Stopped Being Asked.</em>
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Written by Doug Olear &nbsp;·&nbsp; WGA: 2341477 &nbsp;·&nbsp; © 2026 &nbsp;·&nbsp; beforethegods.com</p>
+  </div>
+
+</div>
+</body>
+</html>
