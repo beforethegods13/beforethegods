@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Before the Gods</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --ash: #1a1612;
+    --white: #f5f0e8;
+    --white-dim: rgba(245,240,232,0.75);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d0a06;
+    color: var(--white);
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
+  }
+  .nav-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--white-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HEADER */
+  .gallery-header {
+    padding: 120px 40px 60px 40px;
+    text-align: center;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .gallery-header-eye {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .gallery-header-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 32px;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .gallery-header-sub {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--white-dim);
+  }
+
+  /* GALLERY GRID */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 100%;
+  }
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .gallery-item:hover img { transform: scale(1.02); }
+  .gallery-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 40px 40px 32px 40px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+    transform: translateY(8px);
+    transition: transform 0.3s ease;
+  }
+  .gallery-item:hover .gallery-caption { transform: translateY(0); }
+  .gallery-caption-act {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .gallery-caption-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .gallery-caption-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--white-dim);
+    max-width: 600px;
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px; right: 32px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--white-dim);
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  /* FOOTER */
+  .gallery-footer {
+    padding: 48px 40px;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+  .gallery-footer a {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .gallery-footer a:hover { color: var(--white); }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 16px; }
+    .gallery-header { padding: 90px 20px 40px 20px; }
+    .gallery-header-title { font-size: 22px; }
+    .gallery-caption { padding: 24px 20px 20px 20px; }
+    .gallery-caption-title { font-size: 15px; }
+    .gallery-caption-text { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-title" href="index.html">Before the Gods</a>
+  <ul class="nav-links">
+    <li><a href="index.html#film">The Film</a></li>
+    <li><a href="index.html#gallery">Images</a></li>
+    <li><a href="index.html#writer">Writer</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="gallery-header">
+  <p class="gallery-header-eye">Concept Art · 70,000 Years</p>
+  <h1 class="gallery-header-title">The Full Gallery</h1>
+  <p class="gallery-header-sub">From the first hunt to the last question.</p>
+</div>
+
+<div class="gallery-grid">
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="KAEL_HUNT.png" alt="Kael, Duma and the tribe">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Act One · 70,000 BCE · East Africa</p>
+      <p class="gallery-caption-title">Kael, Duma & the Tribe — The Hunt</p>
+      <p class="gallery-caption-text">The lion is down. But Kael looks up — something is coming. Dark. Low. Humming.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="MAMMOTH.png" alt="The mammoth hunt">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Act One · 18,000 BCE · Beringia</p>
+      <p class="gallery-caption-title">The Mammoth Hunt</p>
+      <p class="gallery-caption-text">The ice bridge holds. The herd does not.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="ENLIL.png" alt="Enlil in Lidu's dream">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Act Two · Mesopotamia · 3,000 BCE</p>
+      <p class="gallery-caption-title">Enlil</p>
+      <p class="gallery-caption-text">God of Storm & Dominion. He appears to Lidu in a dream.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="ISHTAR.png" alt="Ishtar">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Act Two · Mesopotamia · 3,000 BCE</p>
+      <p class="gallery-caption-title">Ishtar</p>
+      <p class="gallery-caption-text">Goddess of Love & War. Both. Always both.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="MARDUK_AND_MUSHHUSH.png" alt="Marduk and Mushhushshu">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Act Two · Mesopotamia · 3,000 BCE</p>
+      <p class="gallery-caption-title">Marduk & Mushhushshu</p>
+      <p class="gallery-caption-text">The dragon does not speak for itself. It speaks for him. Two thousand years of prayer, in one voice.</p>
+    </div>
+  </div>
+
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="NIAI_AND_TOBIAUS.png" alt="Tobias and Niai">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Act Three · Babylon · 550 BCE</p>
+      <p class="gallery-caption-title">Tobias & Niai</p>
+      <p class="gallery-caption-text">Exile does not erase what was written in the blood.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="DRUIDS_ROOTS.png" alt="Druid boy held by branch and root">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Vignette · Mona, Wales · 60 CE</p>
+      <p class="gallery-caption-title">The Vessel</p>
+      <p class="gallery-caption-text">The branch holds one hand. The root holds the other. From the sky and from the earth — the oak steadies the boy who must carry everything it cannot.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="DRUIDS_RINGS.png" alt="Druid boy inside oak rings">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Vignette · Mona, Wales · 60 CE</p>
+      <p class="gallery-caption-title">What the Oak Remembers</p>
+      <p class="gallery-caption-text">A thousand years of memory, pulsing in the rings. The boy stands at the center of everything the tree has ever witnessed.</p>
+    </div>
+  </div>
+
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="DRUIDS.png" alt="Druid priest and apprentice">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Vignette · Celtic Britain · 60 CE</p>
+      <p class="gallery-caption-title">The Druid & His Apprentice</p>
+      <p class="gallery-caption-text">What is not remembered is already lost.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="MAYAN_CODEX.png" alt="Mayan Codex burning">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Vignette · Yucatán · 1562 CE</p>
+      <p class="gallery-caption-title">The Burning of the Codices</p>
+      <p class="gallery-caption-text">In a single afternoon, a thousand years of knowledge became ash.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="MECCA.png" alt="Aerial view of Masjid al-Haram Mecca">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Vignette · Masjid al-Haram, Mecca · Present Day</p>
+      <p class="gallery-caption-title">The Human Galaxy</p>
+      <p class="gallery-caption-text">From one man in a cave to this. Two million people. One direction. One center. The same stars above as have always been above.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="ZOROASTRIAN_TEMPLE.png" alt="Zoroastrian priest before the flame">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Vignette · Persia · c. 500 BCE</p>
+      <p class="gallery-caption-title">The Keeper of the Flame</p>
+      <p class="gallery-caption-text">The padan covers his mouth — so his breath does not corrupt what he protects.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="ZOROASTRIAN_BOAT.png" alt="Zoroastrian priest in boat">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Vignette · Persia · c. 500 BCE</p>
+      <p class="gallery-caption-title">The Fire Does Not Go Out</p>
+      <p class="gallery-caption-text">The city glows behind him. One tear falls into the river. He does not wipe it. It does not stop him.</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox(this)">
+    <img src="THEO___GRANDMA_HERO_copy.png" alt="Theo and Grandma">
+    <div class="gallery-caption">
+      <p class="gallery-caption-act">Present Day</p>
+      <p class="gallery-caption-title">Theo & Grandma</p>
+      <p class="gallery-caption-text">Theo looking at the same stars Kael looked at 70,000 years ago.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="gallery-footer">
+  <a href="index.html">← Return to Before the Gods</a>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">CLOSE · ESC</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  function openLightbox(el) {
+    const img = el.querySelector('img');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
