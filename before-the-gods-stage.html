@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Before the Gods — The Stage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;
+  --gold-light:#E2C46A;
+  --gold-dim:#7A6030;
+  --gold-rule:rgba(201,168,76,0.22);
+  --white:#F5F0E8;
+  --white-dim:rgba(245,240,232,0.80);
+  --white-faint:rgba(245,240,232,0.52);
+  --panel-bg:rgba(6,4,2,0.68);
+  --panel-border:rgba(201,168,76,0.26);
+  --bg:#080604;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'EB Garamond',Georgia,serif;
+  color:var(--white);
+  background:var(--bg);
+  overflow-x:hidden;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;
+  background:linear-gradient(180deg,rgba(6,4,2,.96) 0%,rgba(6,4,2,0) 100%);
+}
+.nav-logo{
+  font-family:'Cinzel',serif;
+  font-size:10px;letter-spacing:.38em;text-transform:uppercase;
+  color:var(--gold);text-decoration:none;
+}
+.nav-back{
+  font-family:'Cinzel',serif;
+  font-size:9px;letter-spacing:.30em;text-transform:uppercase;
+  color:var(--gold-dim);text-decoration:none;
+  border-bottom:1px solid var(--gold-dim);padding-bottom:1px;
+  transition:color .25s,border-color .25s;
+}
+.nav-back:hover{color:var(--gold);border-color:var(--gold)}
+
+/* ── HERO ── */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:120px 40px 80px;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url("https://beforethegods.com/ISHTAR.png");
+  background-size:cover;
+  background-position:70% center;
+  z-index:0;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(100deg,
+    rgba(6,4,2,.97) 0%,
+    rgba(6,4,2,.88) 28%,
+    rgba(6,4,2,.55) 52%,
+    rgba(6,4,2,.18) 72%,
+    rgba(6,4,2,.04) 100%);
+  z-index:1;
+}
+/* Subtle curtain texture */
+.hero-bg::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(201,168,76,.012) 3px,
+    rgba(201,168,76,.012) 4px
+  );
+  z-index:1;
+}
+.hero-content{position:relative;z-index:3;max-width:860px;}
+
+.hero-eyebrow{
+  font-family:'Cinzel',serif;
+  font-size:9px;letter-spacing:.50em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:32px;opacity:.85;
+}
+.hero-title-top{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,5vw,52px);font-weight:300;font-style:italic;
+  color:var(--gold-light);letter-spacing:.10em;
+  line-height:1;margin-bottom:6px;
+}
+.hero-title-main{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(38px,8vw,90px);font-weight:700;
+  color:var(--white);letter-spacing:.04em;
+  line-height:.95;margin-bottom:10px;
+}
+.hero-title-sub{
+  font-family:'Cinzel',serif;
+  font-size:clamp(12px,2.2vw,22px);font-weight:400;
+  letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:40px;
+}
+.hero-rule{
+  width:220px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 40px;
+}
+.hero-pitch{
+  font-family:'EB Garamond',serif;
+  font-size:clamp(20px,2.8vw,30px);font-style:italic;
+  color:var(--white-dim);line-height:1.55;
+  max-width:680px;margin:0 auto 18px;
+}
+.hero-pitch-small{
+  font-family:'Cinzel',serif;
+  font-size:9px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold);margin-top:28px;
+}
+
+/* ── SECTION SHARED ── */
+section{padding:80px 40px;max-width:960px;margin:0 auto;}
+.section-label{
+  font-family:'Cinzel',serif;
+  font-size:8px;letter-spacing:.46em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+.section-rule{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,var(--gold-rule),transparent);
+  margin-bottom:40px;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(30px,4vw,48px);font-weight:300;font-style:italic;
+  color:var(--white);line-height:1.15;margin-bottom:28px;
+}
+.section-body{
+  font-family:'EB Garamond',serif;
+  font-size:clamp(16px,1.8vw,20px);line-height:1.72;
+  color:var(--white-dim);
+}
+
+/* ── VISION SECTION ── */
+.vision-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  margin-top:40px;
+}
+.vision-card{
+  background:var(--panel-bg);
+  border:1px solid var(--panel-border);
+  padding:28px 30px;
+}
+.vision-card-label{
+  font-family:'Cinzel',serif;
+  font-size:7.5px;letter-spacing:.36em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+}
+.vision-card-text{
+  font-family:'EB Garamond',serif;
+  font-size:clamp(15px,1.6vw,17px);font-style:italic;line-height:1.68;
+  color:var(--white-dim);
+}
+
+/* ── ACTS ── */
+.acts-intro{
+  font-family:'EB Garamond',serif;
+  font-size:clamp(16px,1.8vw,19px);line-height:1.70;
+  color:var(--white-dim);margin-bottom:48px;
+}
+.act-block{
+  display:grid;grid-template-columns:80px 1fr;gap:0 32px;
+  margin-bottom:40px;padding-bottom:40px;
+  border-bottom:1px solid var(--gold-rule);
+  align-items:start;
+}
+.act-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.act-number{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(32px,4vw,50px);font-weight:400;
+  color:var(--gold-dim);line-height:1;
+  padding-top:4px;
+}
+.act-body{}
+.act-era{
+  font-family:'Cinzel',serif;
+  font-size:8px;letter-spacing:.38em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:6px;
+}
+.act-title{
+  font-family:'EB Garamond',serif;
+  font-size:clamp(22px,2.8vw,30px);font-weight:500;
+  color:var(--white);margin-bottom:6px;line-height:1.2;
+}
+.act-tradition{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(14px,1.6vw,17px);font-style:italic;
+  color:var(--gold-light);margin-bottom:12px;
+}
+.act-desc{
+  font-family:'EB Garamond',serif;
+  font-size:clamp(15px,1.6vw,17px);line-height:1.68;
+  color:var(--white-dim);margin-bottom:12px;
+}
+.act-song{
+  display:inline-block;
+  font-family:'Cinzel',serif;
+  font-size:7px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--gold-dim);
+  border-left:2px solid var(--gold-dim);
+  padding-left:12px;
+  font-style:normal;
+}
+.act-song em{
+  font-family:'EB Garamond',serif;
+  font-size:13px;letter-spacing:.04em;font-style:italic;
+  color:var(--white-faint);
+}
+
+/* ── COMPS ── */
+.comps-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  margin-top:40px;
+}
+.comp-card{
+  background:var(--panel-bg);
+  border:1px solid var(--panel-border);
+  padding:24px 22px;
+  text-align:center;
+}
+.comp-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(10px,1.3vw,13px);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;
+}
+.comp-why{
+  font-family:'EB Garamond',serif;
+  font-size:clamp(14px,1.5vw,16px);font-style:italic;line-height:1.58;
+  color:var(--white-faint);
+}
+
+/* ── THE ASK / CLOSING ── */
+.closing{
+  text-align:center;padding:80px 40px 100px;
+  position:relative;
+}
+.closing::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:300px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.closing-eyebrow{
+  font-family:'Cinzel',serif;
+  font-size:9px;letter-spacing:.44em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:28px;opacity:.8;
+}
+.closing-statement{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(24px,4vw,46px);font-weight:300;font-style:italic;
+  color:var(--white);line-height:1.40;
+  max-width:760px;margin:0 auto 18px;
+}
+.closing-note{
+  font-family:'EB Garamond',serif;
+  font-size:clamp(14px,1.6vw,17px);line-height:1.68;font-style:italic;
+  color:var(--white-faint);max-width:600px;margin:0 auto 40px;
+}
+.closing-rule{
+  width:120px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 30px;
+}
+.closing-back{
+  display:inline-block;
+  font-family:'Cinzel',serif;
+  font-size:8.5px;letter-spacing:.36em;text-transform:uppercase;
+  color:var(--gold-dim);text-decoration:none;
+  border-bottom:1px solid var(--gold-dim);padding-bottom:2px;
+  transition:color .25s,border-color .25s;
+}
+.closing-back:hover{color:var(--gold);border-color:var(--gold)}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--gold-rule);
+  padding:30px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-mark{
+  font-family:'Cinzel',serif;
+  font-size:8px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold-dim);
+}
+.footer-copy{
+  font-family:'EB Garamond',serif;
+  font-size:13px;font-style:italic;
+  color:rgba(245,240,232,.28);
+}
+
+/* ── MOBILE ── */
+@media(max-width:700px){
+  nav{padding:16px 22px}
+  section{padding:60px 22px}
+  .vision-grid{grid-template-columns:1fr}
+  .act-block{grid-template-columns:50px 1fr;gap:0 18px}
+  .comps-grid{grid-template-columns:1fr}
+  .closing{padding:60px 22px 80px}
+  footer{padding:24px 22px;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://beforethegods.com">Before the Gods</a>
+  <a class="nav-back" href="https://beforethegods.com">← Return to Site</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">IP Extensions &nbsp;/&nbsp; Theatrical</p>
+    <p class="hero-title-top">Before the Gods</p>
+    <h1 class="hero-title-main">THE STAGE</h1>
+    <p class="hero-title-sub">A Musical Adaptation</p>
+    <div class="hero-rule"></div>
+    <p class="hero-pitch">
+      The oldest question ever asked.<br>
+      Sung for the first time.
+    </p>
+    <p class="hero-pitch-small">Eleven Civilizations &nbsp;·&nbsp; Eleven Soundscapes &nbsp;·&nbsp; One Question &nbsp;·&nbsp; Never Answered</p>
+  </div>
+</div>
+
+<!-- VISION -->
+<section>
+  <p class="section-label">The Theatrical Vision</p>
+  <div class="section-rule"></div>
+  <h2 class="section-title">A score drawn from the earth itself.</h2>
+  <p class="section-body">
+    Before the Gods spans 70,000 years and eleven distinct civilizations — each with its own musical DNA, its own relationship to silence and sound, its own way of crying out into the dark. A stage adaptation does not impose a single musical language onto this world. It inhabits each one. The score moves through African choral harmonics, Mesopotamian drone and percussion, ancient Hebrew cantorial modes, early Christian plainsong, and Indigenous ceremonial song — unified not by genre but by a single recurring motif: a wordless human voice, asking.
+  </p>
+  <div class="vision-grid">
+    <div class="vision-card">
+      <p class="vision-card-label">Theatrical Concept</p>
+      <p class="vision-card-text">Minimal staging. Maximum world. Each era is distinguished by sound, light, and movement — not spectacle. The stage belongs to the voice. The audience supplies the gods.</p>
+    </div>
+    <div class="vision-card">
+      <p class="vision-card-label">The Through-Line</p>
+      <p class="vision-card-text">A single melodic fragment — wordless, ancient, unresolved — returns in every act. It is never completed. It cannot be. That incompletion is the point. The audience carries it home.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACTS -->
+<section>
+  <p class="section-label">Act Structure</p>
+  <div class="section-rule"></div>
+  <p class="acts-intro">
+    Eleven civilizations. Eleven eras. Eleven musical traditions that have never shared a stage. Each act functions as a self-contained world — with its own sound, its own characters, its own unanswered question — while the emotional architecture builds toward a conclusion that offers no relief and no comfort, only the truth: that asking was always enough.
+  </p>
+
+  <!-- ACT I -->
+  <div class="act-block">
+    <div class="act-number">I</div>
+    <div class="act-body">
+      <p class="act-era">Southern Africa &nbsp;·&nbsp; 70,000 BCE</p>
+      <h3 class="act-title">The First Fire</h3>
+      <p class="act-tradition">San Bushman vocal tradition &nbsp;·&nbsp; click consonants, throat resonance, communal drone</p>
+      <p class="act-desc">
+        Kael holds his mother Monica as she dies. Around them, the settlement sings — not a song of mourning, but of asking. Why does the fire go out? Why does the body stop? The ensemble becomes the question itself: voices layering, overlapping, never resolving. The show's central motif is heard for the first time, half-formed, barely a phrase.
+      </p>
+      <span class="act-song">Signature Moment &nbsp; <em>"Where Does the Fire Go" — the ensemble, unaccompanied</em></span>
+    </div>
+  </div>
+
+  <!-- ACT II -->
+  <div class="act-block">
+    <div class="act-number">II</div>
+    <div class="act-body">
+      <p class="act-era">Beringia &nbsp;·&nbsp; 18,000 BCE</p>
+      <h3 class="act-title">The Ice Bridge</h3>
+      <p class="act-tradition">Indigenous Siberian and First Nations ceremonial song &nbsp;·&nbsp; drum, breath, call-and-response</p>
+      <p class="act-desc">
+        A mammoth hunt on the edge of the world. The fire keeper sings the Great Mother Bear into existence — or into belief — before the hunt begins. The score here is percussion and breath: bodies as instruments, the drum as heartbeat. The question shifts: not why does it end, but what must we invent to survive?
+      </p>
+      <span class="act-song">Signature Moment &nbsp; <em>"The Bear That Was Never There" — the fire keeper, solo</em></span>
+    </div>
+  </div>
+
+  <!-- ACT III -->
+  <div class="act-block">
+    <div class="act-number">III</div>
+    <div class="act-body">
+      <p class="act-era">Mesopotamia &nbsp;·&nbsp; c. 3,000 BCE</p>
+      <h3 class="act-title">The God Makers</h3>
+      <p class="act-tradition">Ancient Sumerian temple music &nbsp;·&nbsp; lyres, frame drums, modal scales, ritual chant</p>
+      <p class="act-desc">
+        Enna and Lidu build a god because the city needs one. The music here is formal, architectural — hymns constructed like buildings. But underneath the ritual, a second melody runs: private, uncertain, almost a whisper. The gods sound magnificent. The people who made them sound afraid.
+      </p>
+      <span class="act-song">Signature Moment &nbsp; <em>"We Built You Beautiful" — Enna, to the statue of Ninhursag</em></span>
+    </div>
+  </div>
+
+  <!-- ACT IV -->
+  <div class="act-block">
+    <div class="act-number">IV</div>
+    <div class="act-body">
+      <p class="act-era">Babylon &nbsp;·&nbsp; c. 550 BCE &nbsp;&amp;&nbsp; Nazareth &nbsp;·&nbsp; c. 20 CE</p>
+      <h3 class="act-title">They Cannot Take Our Story</h3>
+      <p class="act-tradition">Hebrew cantorial tradition, early synagogue chant &nbsp;·&nbsp; and the silence of a young carpenter</p>
+      <p class="act-desc">
+        The longest act. Ezra compiles the Torah in exile — a people writing their god into permanence before everything else is lost. Then: a young Jesus in the synagogue, hearing those words read aloud. He knows them by heart. The musical language fractures here deliberately — two traditions, two centuries, one unbroken thread. The cantorial mode of the first scene recurs, transformed, in the second.
+      </p>
+      <span class="act-song">Signature Moment &nbsp; <em>"The Words Are All We Have" — Ezra, and the exiles, in canon</em></span>
+    </div>
+  </div>
+
+  <!-- ACT V -->
+  <div class="act-block">
+    <div class="act-number">V</div>
+    <div class="act-body">
+      <p class="act-era">Present Day</p>
+      <h3 class="act-title">The Question Is Enough</h3>
+      <p class="act-tradition">All eleven traditions, simultaneously — and then silence</p>
+      <p class="act-desc">
+        Theo and Monica, present day. The Milky Way above them. All eleven musical motifs return — not in sequence but layered, overlapping, each civilization's voice present at once. Then they fall away, one by one, until only the original fragment remains: the wordless phrase from Act One, still unresolved. Monica dies, or doesn't. The lights hold. The silence holds. The motif does not complete. The show ends.
+      </p>
+      <span class="act-song">Signature Moment &nbsp; <em>The motif, unaccompanied, unfinished — and then the house lights</em></span>
+    </div>
+  </div>
+</section>
+
+<!-- COMPS -->
+<section>
+  <p class="section-label">Theatrical Comparables</p>
+  <div class="section-rule"></div>
+  <h2 class="section-title">Where it lives on stage.</h2>
+  <div class="comps-grid">
+    <div class="comp-card">
+      <p class="comp-title">Hadestown</p>
+      <p class="comp-why">Mythological world, philosophical stakes, a question asked through music that cannot be answered by music alone.</p>
+    </div>
+    <div class="comp-card">
+      <p class="comp-title">Hamilton</p>
+      <p class="comp-why">Historical sweep compressed into song. The audacity of making the past feel urgent, alive, and unfinished.</p>
+    </div>
+    <div class="comp-card">
+      <p class="comp-title">The Prince of Egypt</p>
+      <p class="comp-why">Ancient world, faith, spectacle — and the courage to dramatize the moment a people decided what to believe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<div class="closing">
+  <p class="closing-eyebrow">The Scope of the IP</p>
+  <p class="closing-statement">
+    Before the Gods was always a story that belonged on every stage it could reach.
+  </p>
+  <p class="closing-note">
+    The stage adaptation is not a secondary format. It is the same question, asked with different instruments. The world is large enough to hold all of them.
+  </p>
+  <div class="closing-rule"></div>
+  <a class="closing-back" href="https://beforethegods.com">← Return to Before the Gods</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-mark">Before the Gods &nbsp;·&nbsp; The Stage &nbsp;·&nbsp; beforethegods.com</span>
+  <span class="footer-copy">© 2026 Doug Olear &nbsp;·&nbsp; WGA 2341477 &nbsp;·&nbsp; U.S. Copyright 1-15159914181</span>
+</footer>
+
+</body>
+</html>
